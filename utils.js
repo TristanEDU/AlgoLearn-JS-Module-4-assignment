@@ -55,7 +55,14 @@ const readFile = (file = "todos.json") => {
 };
 
 const addTodo = (input) => {
-  state.readFileState.push(input);
+  const lastTodo = state.readFileState[state.readFileState.length - 1];
+  const lastID = lastTodo.id;
+
+  state.readFileState.push({
+    id: lastID + 1,
+    Status: false,
+    task: input,
+  });
 };
 
 const removeTodo = (input) => {
@@ -72,6 +79,10 @@ const writeFile = () => {
   fs.writeFileSync("todos.json", JSON.stringify(state.readFileState), "utf8");
 };
 
+const printTasks = () => {
+  console.table(state.readFileState);
+};
+
 const exportsObj = {
   fs,
   todoTemplate,
@@ -84,6 +95,7 @@ const exportsObj = {
   removeTodo,
   editTodo,
   writeFile,
+  printTasks,
 };
 
 Object.defineProperty(exportsObj, "readFileState", {

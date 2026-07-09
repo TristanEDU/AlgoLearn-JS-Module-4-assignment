@@ -16,7 +16,7 @@ async function app() {
   } else if (input === 1) {
     choice = await rl.addTaskPrompt();
     utils.addTodo(choice);
-    console.log(utils.readFileState);
+    console.table(utils.readFileState);
     utils.writeFile();
     app();
   } else if (input === 2) {

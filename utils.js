@@ -3,16 +3,32 @@ const ui = require("./ui.js");
 const { json } = require("stream/consumers");
 
 const todoTemplate = {
-  id: null,
+  // id: null,
   status: false,
   task: "",
+};
+
+const initFileSetup = () => {
+  fs.writeFileSync(
+    "todos.json",
+    JSON.stringify([
+      {
+        // id: 0,
+        Status: false,
+        task: "This is a Placeholder ToDo",
+      },
+    ]),
+    "utf8",
+  );
+  readFile();
 };
 
 const createTodoFile = (fileName) => {
   try {
     fs.closeSync(fs.openSync(fileName, "wx"));
     console.log("File created successfully.");
-    // TODO upate log with ui message
+    // TODO update log with ui message
+    initFileSetup(); // added this that way the initial array and placeholder object is added to the todo.json file on creation
   } catch (err) {
     if (err.code === "EEXIST") {
       console.log("File already exists!");
@@ -20,11 +36,6 @@ const createTodoFile = (fileName) => {
       console.error(err);
     }
   }
-};
-
-const initFileSetup = () => {
-  fs.writeFileSync("todos.json", JSON.stringify([]), "utf8");
-  readFile();
 };
 
 const addTodoToFile = () => {
@@ -56,22 +67,22 @@ const readFile = (file = "todos.json") => {
 
 const addTodo = (input) => {
   const lastTodo = state.readFileState[state.readFileState.length - 1];
-  const lastID = lastTodo.id;
+  // const lastID = lastTodo.id;
 
   state.readFileState.push({
-    id: lastID + 1,
+    // id: lastID + 1,
     Status: false,
     task: input,
   });
 };
 
 const removeTodo = (input) => {
-  const i = input - 1;
-  delete state.readFileState[i];
+  const i = input;
+  state.readFileState.splice([i], 1);
 };
 
 const editTodo = (todo, property, edit) => {
-  const i = todo - 1;
+  const i = todo;
   state.readFileState[i][property] = edit;
 };
 

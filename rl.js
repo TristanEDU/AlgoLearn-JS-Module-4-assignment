@@ -37,17 +37,17 @@ async function addTaskPrompt() {
 
 async function removeTaskPrompt() {
   const input = await rl.question(
-    `To permanently delete a task, enter its ID below. 
+    `To permanently delete a task, enter its Index below. 
     
-ID: `,
+Index: `,
   );
   return input.trim();
 }
 
 async function updateTaskPrompt() {
-  const taskID = await rl.question(`To update a task enter its ID below.
+  const taskIndex = await rl.question(`To update a task enter its Index below.
 
-ID: `);
+Index: `);
 
   const taskProperty =
     await rl.question(`Choose the property you would like to update:
@@ -61,7 +61,7 @@ Property: `);
 New value: `);
 
   return {
-    taskID: taskID.trim(),
+    taskIndex: taskIndex.trim(),
     taskProperty: taskProperty.trim(),
     taskPropertyValue: taskPropertyValue.trim(),
   };

@@ -53,7 +53,7 @@ Index: `);
     await rl.question(`Choose the property you would like to update:
 
 1. Status
-2. Task description
+2. Task
 
 Property: `);
 

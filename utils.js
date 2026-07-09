@@ -3,9 +3,8 @@ const ui = require("./ui.js");
 const { json } = require("stream/consumers");
 
 const todoTemplate = {
-  // id: null,
-  status: false,
-  task: "",
+  Status: false,
+  Task: "",
 };
 
 const initFileSetup = () => {
@@ -13,9 +12,8 @@ const initFileSetup = () => {
     "todos.json",
     JSON.stringify([
       {
-        // id: 0,
         Status: false,
-        task: "This is a Placeholder ToDo",
+        Task: "This is a Placeholder ToDo",
       },
     ]),
     "utf8",
@@ -67,12 +65,10 @@ const readFile = (file = "todos.json") => {
 
 const addTodo = (input) => {
   const lastTodo = state.readFileState[state.readFileState.length - 1];
-  // const lastID = lastTodo.id;
 
   state.readFileState.push({
-    // id: lastID + 1,
     Status: false,
-    task: input,
+    Task: input,
   });
 };
 

@@ -29,15 +29,26 @@ async function app() {
   } else if (input === 3) {
     utils.printTasks();
     choice = await rl.updateTaskPrompt();
-    // console.log(choice);
 
-    // console.log(choice.taskID, choice.taskProperty, choice.taskPropertyValue);
+    input = Number(choice.taskIndex);
 
-    input = Number(choice.taskID);
-    let property =
-      choice.taskProperty.charAt(0).toUpperCase() +
-      choice.taskProperty.slice(1).toLowerCase();
-    let edit = choice.taskPropertyValue;
+    let property;
+    if (Number(choice.taskProperty) === 1) {
+      property = "Status";
+    } else if (Number(choice.taskProperty) === 2) {
+      property = "Task";
+    } else {
+      let property =
+        choice.taskProperty.charAt(0).toUpperCase() +
+        choice.taskProperty.slice(1).toLowerCase();
+    }
+    let edit;
+    if (property === "Status") {
+      edit = choice.taskPropertyValue.toLowerCase() === "true";
+    } else {
+      edit = choice.taskPropertyValue;
+    }
+
     utils.editTodo(input, property, edit);
     utils.writeFile();
     app();
@@ -64,15 +75,23 @@ async function app() {
       app();
     } else if (input === 3) {
       choice = await rl.updateTaskPrompt();
-      // console.log(choice);
-
-      // console.log(choice.taskID, choice.taskProperty, choice.taskPropertyValue);
-
-      input = Number(choice.taskID);
-      let property =
-        choice.taskProperty.charAt(0).toUpperCase() +
-        choice.taskProperty.slice(1).toLowerCase();
-      let edit = choice.taskPropertyValue;
+      input = Number(choice.taskIndex);
+      let property;
+      if (Number(choice.taskProperty) === 1) {
+        property = "Status";
+      } else if (Number(choice.taskProperty) === 2) {
+        property = "Task";
+      } else {
+        let property =
+          choice.taskProperty.charAt(0).toUpperCase() +
+          choice.taskProperty.slice(1).toLowerCase();
+      }
+      let edit;
+      if (property === "Status") {
+        edit = choice.taskPropertyValue.toLowerCase() === "true";
+      } else {
+        edit = choice.taskPropertyValue;
+      }
       utils.editTodo(input, property, edit);
       utils.writeFile();
       app();
